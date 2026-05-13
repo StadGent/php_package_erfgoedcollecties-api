@@ -1,0 +1,48 @@
+{
+    "name": "gent/erfgoedcollecties-api",
+    "description": "This package provides the functionality to access the Erfgoedcollecties API and its methods.",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Jelle Sebreghts",
+            "email": "Jelle.Sebreghts@district09.gent"
+        }
+    ],
+    "homepage": "https://github.com/district09/php_package_erfgoedcollecties-api",
+    "require": {
+        "digipolisgent/value": "^3.0",
+        "digipolisgent/api-client": "^3.0"
+    },
+    "require-dev": {
+        "district09/qa-php": "^2.2"
+    },
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "Gent\\ErfgoedcollectiesApi\\": "src/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "ergebnis/composer-normalize": true,
+            "phpro/grumphp-shim": true
+        }
+    },
+    "extra": {
+        "grumphp": {
+            "config-default-path": "vendor/district09/qa-php/configs/grumphp.yml"
+        }
+    },
+    "scripts": {
+        "post-install-cmd": "vendor/bin/grumphp git:init",
+        "coverage": "vendor/bin/phpunit --configuration=phpunit.qa-php.xml --coverage-html build/coverage",
+        "grumphp": "vendor/bin/grumphp run",
+        "phpcpd": "vendor/bin/grumphp run --tasks=phpcpd",
+        "phpcs": "vendor/bin/grumphp run --tasks=phpcs",
+        "phpmd": "vendor/bin/grumphp run --tasks=phpmd",
+        "phpstan": "vendor/bin/grumphp run --tasks=phpstan",
+        "phpunit": "vendor/bin/phpunit --configuration=phpunit.qa-php.xml"
+    }
+}
