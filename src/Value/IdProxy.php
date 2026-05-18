@@ -74,7 +74,7 @@ final class IdProxy extends ValueAbstract implements ValueFromArrayInterface
     {
         /** @var \Gent\ErfgoedcollectiesApi\Value\IdProxy $object */
         return $this->sameValueTypeAs($object)
-            && $this->getType()->sameValueAs($object->getType())
+            && $this->getType() === $object->getType()
             && $this->getUri() === $object->getUri();
     }
 

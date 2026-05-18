@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Gent\ErfgoedcollectiesApi\Uri;
 
 use DigipolisGent\API\Client\Uri\UriInterface;
+
 /**
  * Base request URI to be used to communicate with the server endpoint.
  */

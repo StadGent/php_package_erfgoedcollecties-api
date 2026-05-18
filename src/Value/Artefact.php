@@ -9,6 +9,13 @@ use DigipolisGent\Value\ValueInterface;
 
 /**
  * Artefact value object.
+ *
+ * @SuppressWarnings("PHPMD.TooManyFields")
+ * @SuppressWarnings("PHPMD.ExcessiveClassComplexity")
+ * @SuppressWarnings("PHPMD.ShortVariable")
+ * @SuppressWarnings("PHPMD.LongVariable")
+ * @SuppressWarnings("PHPMD.CyclomaticComplexity")
+ * @SuppressWarnings("PHPMD.NPathComplexity")
  */
 final class Artefact extends ValueAbstract implements ValueFromArrayInterface
 {
@@ -57,9 +64,9 @@ final class Artefact extends ValueAbstract implements ValueFromArrayInterface
     /**
      * The object name.
      *
-     * @var \Gent\ErfgoedcollectiesApi\Value\IdProxyWithLabelCollection|null
+     * @var \Gent\ErfgoedcollectiesApi\Value\IdProxyWithLabelCollection
      */
-    private ?IdProxyWithLabelCollection $objectNaam;
+    private IdProxyWithLabelCollection $objectNaam;
 
     /**
      * The categories.
@@ -405,9 +412,9 @@ final class Artefact extends ValueAbstract implements ValueFromArrayInterface
     /**
      * Get the object name.
      *
-     * @return \Gent\ErfgoedcollectiesApi\Value\IdProxyWithLabelCollection|null
+     * @return \Gent\ErfgoedcollectiesApi\Value\IdProxyWithLabelCollection
      */
-    public function getObjectNaam(): ?IdProxyWithLabelCollection
+    public function getObjectNaam(): IdProxyWithLabelCollection
     {
         return $this->objectNaam;
     }
@@ -699,7 +706,7 @@ final class Artefact extends ValueAbstract implements ValueFromArrayInterface
             && $this->getAfdeling() === $object->getAfdeling()
             && $this->getObjectNummer() === $object->getObjectNummer()
             && $this->compareAlternatiefNummer($object)
-            && $this->compareObjectNaam($object)
+            && $this->getObjectNaam()->sameValueAs($object->getObjectNaam())
             && $this->getCategorie()->sameValueAs($object->getCategorie())
             && $this->getTitel() === $object->getTitel()
             && $this->getTitelNl() === $object->getTitelNl()
@@ -747,26 +754,6 @@ final class Artefact extends ValueAbstract implements ValueFromArrayInterface
         }
 
         return $this->getAlternatiefNummer()->sameValueAs($object->getAlternatiefNummer());
-    }
-
-    /**
-     * Compare objectNaam.
-     *
-     * @param \Gent\ErfgoedcollectiesApi\Value\Artefact $object
-     *
-     * @return bool
-     */
-    private function compareObjectNaam(Artefact $object): bool
-    {
-        if ($this->getObjectNaam() === null && $object->getObjectNaam() === null) {
-            return true;
-        }
-
-        if ($this->getObjectNaam() === null || $object->getObjectNaam() === null) {
-            return false;
-        }
-
-        return $this->getObjectNaam()->sameValueAs($object->getObjectNaam());
     }
 
     /**

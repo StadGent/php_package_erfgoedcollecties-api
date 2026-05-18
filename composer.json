@@ -11,8 +11,8 @@
     ],
     "homepage": "https://github.com/district09/php_package_erfgoedcollecties-api",
     "require": {
-        "digipolisgent/value": "^3.0",
-        "digipolisgent/api-client": "^3.0"
+        "digipolisgent/api-client": "^3.0",
+        "digipolisgent/value": "^3.0"
     },
     "require-dev": {
         "district09/qa-php": "^2.2"
@@ -28,11 +28,6 @@
             "dealerdirect/phpcodesniffer-composer-installer": true,
             "ergebnis/composer-normalize": true,
             "phpro/grumphp-shim": true
-        }
-    },
-    "extra": {
-        "grumphp": {
-            "config-default-path": "vendor/district09/qa-php/configs/grumphp.yml"
         }
     },
     "scripts": {

@@ -1,3 +1,4 @@
 vendor
 composer.lock
 examples/config.php
+*.qa-php.*

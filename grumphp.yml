@@ -1,0 +1,101 @@
+grumphp:
+    process_timeout: 3600
+    hide_circumvention_tip: true
+    ascii:
+        failed: ~
+        succeeded: ~
+    fixer:
+        enabled: true
+        fix_by_default: true
+    environment:
+        paths:
+            - .env
+            - .env.local
+    testsuites:
+        git_commit_msg:
+            tasks:
+                - git_commit_message
+        git_pre_commit:
+            tasks:
+                - composer
+                - git_blacklist
+                - git_branch_name
+                - phpcs
+                - phpmd
+                - phpstan
+                - securitychecker_enlightn
+                - yamllint
+        tests:
+            tasks:
+                - phpunit
+    tasks:
+        composer: ~
+        composer_normalize: ~
+        git_blacklist:
+            keywords:
+                - " die\\("
+                - " exit;"
+                - " exit\\("
+                - "\\$_[A-Z_]+\\["
+            regexp_type: E
+            triggered_by:
+                - inc
+                - install
+                - module
+                - php
+                - profile
+                - theme
+        git_branch_name:
+            whitelist:
+                - "#^main|^master|^develop|^\\d+(\\.\\d+)?\\.x|^(release|hotfix)/\\d+\\.\\d+\\.\\d+|^feature/([A-Z][A-Z\\d]+-\\d+|[a-z][a-z\\d]*(-[a-z\\d]+)*)$#"
+        git_commit_message:
+            matchers:
+                - "/^([A-Z][A-Z\\d]+-\\d+(, [A-Z][A-Z\\d]+-\\d+)*: )?(Add|Change|Fix|Update|Remove|Refactor|Revert|Merge|RELEASE) /"
+            case_insensitive: false
+        phpcs:
+            standard:
+                - phpcs.qa-php.xml
+            report_width: 120
+            ignore_patterns:
+                - build/
+                - examples/
+                - vendor/
+            triggered_by:
+                - css
+                - inc
+                - js
+                - php
+        phpmd:
+            ruleset:
+                - phpmd.qa-php.xml
+            exclude:
+                - "build/*"
+                - "tests/*"
+                - "vendor/*"
+            triggered_by:
+                - inc
+                - php
+        phpstan:
+            configuration: phpstan.qa-php.neon
+            ignore_patterns:
+                - "#^build/#"
+                - "#(^|/)tests/#"
+                - "#^vendor/#"
+            triggered_by:
+                - inc
+                - php
+        phpunit:
+            config_file: phpunit.qa-php.xml
+        securitychecker_enlightn:
+            lockfile: ./composer.lock
+            run_always: false
+        yamllint:
+            ignore_patterns:
+                - "#^build/#"
+                - "#^vendor/#"
+
+services:
+    listener.qa_php.task:
+        class: District09\QA\PHP\GrumPHP\EventListener\TaskEventListener
+        tags:
+            - { name: grumphp.event_listener, event: grumphp.task.run, method: createTaskConfig, priority: 100 }

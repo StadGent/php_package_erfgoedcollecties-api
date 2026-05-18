@@ -9,6 +9,10 @@ use DigipolisGent\Value\ValueInterface;
 
 /**
  * Agent value object.
+ *
+ * @SuppressWarnings("PHPMD.ExcessiveClassComplexity")
+ * @SuppressWarnings("PHPMD.ShortVariable")
+ * @SuppressWarnings("PHPMD.CyclomaticComplexity")
  */
 final class Agent extends ValueAbstract implements ValueFromArrayInterface
 {

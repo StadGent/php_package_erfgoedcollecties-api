@@ -9,6 +9,9 @@ use DigipolisGent\Value\ValueInterface;
 
 /**
  * Concept value object.
+ *
+ * @SuppressWarnings("PHPMD.ShortVariable")
+ * @SuppressWarnings("PHPMD.CyclomaticComplexity")
  */
 final class Concept extends ValueAbstract implements ValueFromArrayInterface
 {
