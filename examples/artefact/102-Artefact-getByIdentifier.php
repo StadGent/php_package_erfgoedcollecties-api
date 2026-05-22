@@ -66,7 +66,9 @@ try {
     example_sprintf(' Opschriften            : %s', implode(', ', $item->getOpschriften()));
     example_sprintf(' Trefwoorden            : %s', $item->getTrefwoorden());
     example_sprintf(' Vervaardigingen        : %s', $item->getVervaardigingen());
-    example_sprintf(' Verwerving             : %s', $item->getVerwerving());
+    example_sprintf(' IIF Manifest URI       : %s', $item->getIiifManifestUri());
+    example_sprintf(' Exposities             : %s', $item->getExposities());
+    example_sprintf(' Last modified date     : %s', $item->getLastModifiedDate()->format(\DateTimeInterface::ATOM));
     example_print();
 
 } catch (Exception $e) {

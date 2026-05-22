@@ -258,6 +258,27 @@ final class Artefact extends ValueAbstract implements ValueFromArrayInterface
     private bool $isOpZaal;
 
     /**
+     * IIIF manifest uri.
+     *
+     * @var string|null
+     */
+    private ?string $iiifManifestUri;
+
+    /**
+     * Exposities.
+     *
+     * @var \Gent\ErfgoedcollectiesApi\Value\IdProxyWithLabelCollection
+     */
+    private IdProxyWithLabelCollection $exposities;
+
+    /**
+     * Last modified date.
+     *
+     * @var \DateTimeImmutable
+     */
+    private \DateTimeImmutable $lastModifiedDate;
+
+    /**
      * Create the Artefact from an array of data.
      *
      * @param array $data
@@ -284,6 +305,8 @@ final class Artefact extends ValueAbstract implements ValueFromArrayInterface
         $artefact->opschriften = $data['opschriften'] ?? [];
         $artefact->goedkeuringBouwaanvraag = $data['goedkeuringBouwaanvraag'] ?? null;
         $artefact->isOpZaal = !empty($data['isOpZaal']);
+        $artefact->iiifManifestUri = $data['iiifManifestUri'];
+        $artefact->lastModifiedDate = \DateTimeImmutable::createFromFormat(\DateTimeInterface::ATOM, preg_replace('/\.\d+$/', '', $data['lastModifiedDate']) . '+00:00');
 
         $artefact->alternatiefNummer = isset($data['alternatiefNummer']) && is_array($data['alternatiefNummer'])
             ? AlternatiefNummer::fromArray($data['alternatiefNummer'])
@@ -327,6 +350,10 @@ final class Artefact extends ValueAbstract implements ValueFromArrayInterface
 
         $artefact->objectNaam = IdProxyWithLabelCollection::fromArray(
             !empty($data['objectNaam']) && is_array($data['objectNaam']) ? $data['objectNaam'] : []
+        );
+
+        $artefact->exposities = IdProxyWithLabelCollection::fromArray(
+            !empty($data['exposities']) && is_array($data['exposities']) ? $data['exposities'] : []
         );
 
         // Specialized collections
@@ -690,6 +717,37 @@ final class Artefact extends ValueAbstract implements ValueFromArrayInterface
     }
 
     /**
+     * Get iiif manifest uri.
+     *
+     * @return string|null
+     */
+    public function getIiifManifestUri(): ?string
+    {
+      return $this->iiifManifestUri;
+    }
+
+    /**
+     * Get exposities.
+     *
+     * @return IdProxyWithLabelCollection
+     */
+    public function getExposities(): IdProxyWithLabelCollection
+    {
+      return $this->exposities;
+    }
+
+    /**
+     * Get last modified date.
+     *
+     * @return \DateTimeImmutable
+     */
+    public function getLastModifiedDate(): \DateTimeImmutable
+    {
+      return $this->lastModifiedDate;
+    }
+
+
+    /**
      * Check if the given value object is the same as this.
      *
      * @param \DigipolisGent\Value\ValueInterface|\Gent\ErfgoedcollectiesApi\Value\Artefact $object
@@ -733,7 +791,10 @@ final class Artefact extends ValueAbstract implements ValueFromArrayInterface
             && $this->getIconografieOnderwerpen()->sameValueAs($object->getIconografieOnderwerpen())
             && $this->getOpschriften() === $object->getOpschriften()
             && $this->getGoedkeuringBouwaanvraag() === $object->getGoedkeuringBouwaanvraag()
-            && $this->isOpZaal() === $object->isOpZaal();
+            && $this->isOpZaal() === $object->isOpZaal()
+            && $this->getIiifManifestUri() === $object->getIiifManifestUri()
+            && $this->getExposities()->sameValueAs($object->getExposities())
+            && $this->getLastModifiedDate()->getTimestamp() === $object->getLastModifiedDate()->getTimestamp();
     }
 
     /**

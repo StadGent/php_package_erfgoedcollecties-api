@@ -12,6 +12,7 @@ enum ReferenceType: string
     case Concept = 'Concept';
     case Agent = 'Agent';
     case Artefact = 'Artefact';
+    case Exposition = 'Exposition';
 
     /**
      * Create a ReferenceType from an array of data.
