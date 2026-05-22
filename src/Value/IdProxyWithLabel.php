@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Gent\ErfgoedcollectiesApi\Value;
 
-use DigipolisGent\Value\ValueAbstract;
+use Gent\ErfgoedcollectiesApi\Value\ValueAbstract;
 use DigipolisGent\Value\ValueInterface;
 
 /**
@@ -160,5 +160,15 @@ final class IdProxyWithLabel extends ValueAbstract implements ValueFromArrayInte
     public function __toString(): string
     {
         return (string) ($this->getLabel() ?? $this->getUri()) . ($this->type ? ' (' . ((string) $this->type->value) . ')'  : '');
+    }
+
+    protected function normalizePropertyNameForJson($name): string
+    {
+        return match ($name) {
+            'labelNl' => 'label_nl',
+            'labelFr' => 'label_fr',
+            'labelEn' => 'label_en',
+            default => parent::normalizePropertyNameForJson($name),
+        };
     }
 }

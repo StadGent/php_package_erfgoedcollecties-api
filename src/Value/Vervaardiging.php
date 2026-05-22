@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Gent\ErfgoedcollectiesApi\Value;
 
-use DigipolisGent\Value\ValueAbstract;
+use Gent\ErfgoedcollectiesApi\Value\ValueAbstract;
 use DigipolisGent\Value\ValueInterface;
 
 /**
@@ -271,5 +271,13 @@ final class Vervaardiging extends ValueAbstract implements ValueFromArrayInterfa
     public function __toString(): string
     {
         return (string) $this->getTypeVervaardiging();
+    }
+
+    protected function normalizePropertyNameForJson($name): string
+    {
+        return match ($name) {
+            'datumEdtf' => 'datumEDTF',
+            default => parent::normalizePropertyNameForJson($name),
+        };
     }
 }

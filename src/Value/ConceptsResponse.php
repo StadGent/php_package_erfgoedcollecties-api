@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Gent\ErfgoedcollectiesApi\Value;
 
-use DigipolisGent\Value\ValueAbstract;
+use Gent\ErfgoedcollectiesApi\Value\ValueAbstract;
 use DigipolisGent\Value\ValueInterface;
 
 /**

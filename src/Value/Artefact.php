@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Gent\ErfgoedcollectiesApi\Value;
 
-use DigipolisGent\Value\ValueAbstract;
+use Gent\ErfgoedcollectiesApi\Value\ValueAbstract;
 use DigipolisGent\Value\ValueInterface;
 
 /**
@@ -723,7 +723,7 @@ final class Artefact extends ValueAbstract implements ValueFromArrayInterface
      */
     public function getIiifManifestUri(): ?string
     {
-      return $this->iiifManifestUri;
+        return $this->iiifManifestUri;
     }
 
     /**
@@ -733,7 +733,7 @@ final class Artefact extends ValueAbstract implements ValueFromArrayInterface
      */
     public function getExposities(): IdProxyWithLabelCollection
     {
-      return $this->exposities;
+        return $this->exposities;
     }
 
     /**
@@ -743,7 +743,7 @@ final class Artefact extends ValueAbstract implements ValueFromArrayInterface
      */
     public function getLastModifiedDate(): \DateTimeImmutable
     {
-      return $this->lastModifiedDate;
+        return $this->lastModifiedDate;
     }
 
 
@@ -843,5 +843,18 @@ final class Artefact extends ValueAbstract implements ValueFromArrayInterface
     public function __toString(): string
     {
         return (string) $this->getTitel();
+    }
+
+    protected function normalizePropertyNameForJson($name): string
+    {
+        return match ($name) {
+            'titelNl' => 'titel_nl',
+            'titelFr' => 'titel_fr',
+            'titelEn' => 'titel_en',
+            'omschrijvingNl' => 'omschrijving_nl',
+            'omschrijvingFr' => 'omschrijving_fr',
+            'omschrijvingEn' => 'omschrijving_en',
+            default => parent::normalizePropertyNameForJson($name),
+        };
     }
 }
