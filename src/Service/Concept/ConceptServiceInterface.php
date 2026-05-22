@@ -32,7 +32,7 @@ interface ConceptServiceInterface extends ServiceInterface, LoggableInterface, C
      *
      * @throws \Gent\ErfgoedcollectiesApi\Exception\UnexpectedResponseException
      */
-    public function getPaged(int $page = 1, int $pageSize = 10, ?DateTimeInterface $modifiedSince = null): ConceptsResponseValue;
+    public function getPaged(int $page = 1, int $pageSize = 100, ?DateTimeInterface $modifiedSince = null): ConceptsResponseValue;
 
     /**
      * Get a single Concept by its external identifier.

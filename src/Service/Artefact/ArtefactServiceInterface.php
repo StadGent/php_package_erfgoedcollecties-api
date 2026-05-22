@@ -32,7 +32,7 @@ interface ArtefactServiceInterface extends ServiceInterface, LoggableInterface, 
      *
      * @throws \Gent\ErfgoedcollectiesApi\Exception\UnexpectedResponseException
      */
-    public function getPaged(int $page = 1, int $pageSize = 10, ?DateTimeInterface $modifiedSince = null): ArtefactsResponseValue;
+    public function getPaged(int $page = 1, int $pageSize = 100, ?DateTimeInterface $modifiedSince = null): ArtefactsResponseValue;
 
     /**
      * Search artefacts by query.
@@ -50,7 +50,7 @@ interface ArtefactServiceInterface extends ServiceInterface, LoggableInterface, 
      *
      * @throws \Gent\ErfgoedcollectiesApi\Exception\UnexpectedResponseException
      */
-    public function search(string $query, int $page = 1, int $pageSize = 10): ArtefactsResponseValue;
+    public function search(string $query, int $page = 1, int $pageSize = 100): ArtefactsResponseValue;
 
     /**
      * Get a single Artefact by its external identifier.

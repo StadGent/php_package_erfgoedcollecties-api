@@ -25,7 +25,7 @@ final class AgentService extends ServiceAbstract implements AgentServiceInterfac
     /**
      * @inheritDoc
      */
-    public function getPaged(int $page = 1, int $pageSize = 10, ?DateTimeInterface $modifiedSince = null): AgentsResponseValue
+    public function getPaged(int $page = 1, int $pageSize = 100, ?DateTimeInterface $modifiedSince = null): AgentsResponseValue
     {
         $cacheKey = $this->createCacheKeyFromArray([
             'agents',

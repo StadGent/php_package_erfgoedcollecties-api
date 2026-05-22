@@ -26,7 +26,7 @@ final class ArtefactService extends ServiceAbstract implements ArtefactServiceIn
     /**
      * @inheritDoc
      */
-    public function getPaged(int $page = 1, int $pageSize = 10, ?DateTimeInterface $modifiedSince = null): ArtefactsResponseValue
+    public function getPaged(int $page = 1, int $pageSize = 100, ?DateTimeInterface $modifiedSince = null): ArtefactsResponseValue
     {
         $cacheKey = $this->createCacheKeyFromArray([
             'artefacts',
@@ -60,7 +60,7 @@ final class ArtefactService extends ServiceAbstract implements ArtefactServiceIn
     /**
      * @inheritDoc
      */
-    public function search(string $query, int $page = 1, int $pageSize = 10): ArtefactsResponseValue
+    public function search(string $query, int $page = 1, int $pageSize = 100): ArtefactsResponseValue
     {
         // Search results are never cached.
         /** @var \Gent\ErfgoedcollectiesApi\Response\ArtefactsResponse $response */

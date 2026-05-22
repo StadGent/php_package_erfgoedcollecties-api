@@ -32,7 +32,7 @@ interface AgentServiceInterface extends ServiceInterface, LoggableInterface, Cac
      *
      * @throws \Gent\ErfgoedcollectiesApi\Exception\UnexpectedResponseException
      */
-    public function getPaged(int $page = 1, int $pageSize = 10, ?DateTimeInterface $modifiedSince = null): AgentsResponseValue;
+    public function getPaged(int $page = 1, int $pageSize = 100, ?DateTimeInterface $modifiedSince = null): AgentsResponseValue;
 
     /**
      * Get a single Agent by its external identifier.

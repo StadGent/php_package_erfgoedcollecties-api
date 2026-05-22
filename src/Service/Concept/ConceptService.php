@@ -25,7 +25,7 @@ final class ConceptService extends ServiceAbstract implements ConceptServiceInte
     /**
      * @inheritDoc
      */
-    public function getPaged(int $page = 1, int $pageSize = 10, ?DateTimeInterface $modifiedSince = null): ConceptsResponseValue
+    public function getPaged(int $page = 1, int $pageSize = 100, ?DateTimeInterface $modifiedSince = null): ConceptsResponseValue
     {
         $cacheKey = $this->createCacheKeyFromArray([
             'concepts',
