@@ -115,6 +115,13 @@ final class Agent extends ValueAbstract implements ValueFromArrayInterface
     private ?IdProxy $attributedTo;
 
     /**
+     * Last modified date.
+     *
+     * @var \DateTimeImmutable
+     */
+    private \DateTimeImmutable $lastModifiedDate;
+
+    /**
      * Create the Agent from an array of data.
      *
      * @param array $data
@@ -134,6 +141,7 @@ final class Agent extends ValueAbstract implements ValueFromArrayInterface
         $agent->geslacht = $data['geslacht'] ?? null;
         $agent->nationaliteit = $data['nationaliteit'] ?? null;
         $agent->externalIds = $data['externalIds'] ?? [];
+        $artefact->lastModifiedDate = \DateTimeImmutable::createFromFormat(\DateTimeInterface::ATOM, preg_replace('/\.\d+$/', '', $data['lastModifiedDate']) . '+00:00');
 
         $agent->geboorteplaats = isset($data['geboorteplaats']) && is_array($data['geboorteplaats'])
             ? IdProxyWithLabel::fromArray($data['geboorteplaats'])
@@ -301,6 +309,16 @@ final class Agent extends ValueAbstract implements ValueFromArrayInterface
     }
 
     /**
+     * Get last modified date.
+     *
+     * @return \DateTimeImmutable
+     */
+    public function getLastModifiedDate(): \DateTimeImmutable
+    {
+        return $this->lastModifiedDate;
+    }
+
+    /**
      * Check if the given value object is the same as this.
      *
      * @param \DigipolisGent\Value\ValueInterface|\Gent\ErfgoedcollectiesApi\Value\Agent $object
@@ -324,7 +342,8 @@ final class Agent extends ValueAbstract implements ValueFromArrayInterface
             && $this->getExternalIds() === $object->getExternalIds()
             && $this->getActivities()->sameValueAs($object->getActivities())
             && $this->getRelatedEntities()->sameValueAs($object->getRelatedEntities())
-            && $this->compareAttributedTo($object);
+            && $this->compareAttributedTo($object)
+            && $this->getLastModifiedDate()->getTimestamp() === $object->getLastModifiedDate()->getTimestamp();
     }
 
     /**
